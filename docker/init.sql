@@ -1,105 +1,85 @@
-CREATE DATABASE "foliadeiros"
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'Spanish_Spain.1252'
-    LC_CTYPE = 'Spanish_Spain.1252'
-    LOCALE_PROVIDER = 'libc'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1
-    IS_TEMPLATE = False;*/
+DROP TABLE IF EXISTS foliada_grupo;
+DROP TABLE IF EXISTS foliada;
+DROP TABLE IF EXISTS grupo;
+DROP TABLE IF EXISTS usuario;
 
-/*CREATE TABLE usuario(
-usuario_id SERIAL PRIMARY KEY,
-nombre_usuario VARCHAR(50) NOT NULL,
-email VARCHAR(100) UNIQUE NOT NULL,
-password VARCHAR(50) NOT NULL,
-fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);*/
 
-CREATE TABLE foliada(
-foliada_id SERIAL PRIMARY KEY,
-nombre VARCHAR(50) NOT NULL,
-fecha DATE NOT NULL,
-hora TIME,
-provincia VARCHAR(50),
-descripcion VARCHAR(700),
-latitud DOUBLE PRECISION,
-longitud DOUBLE PRECISION,
-imagen_cartel VARCHAR(100)
+-- TABLA USUARIO
+CREATE TABLE usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE grupo(
-grupo_id SERIAL PRIMARY KEY,
-nombre VARCHAR(100) NOT NULL,
-origen VARCHAR(100),
-tipo VARCHAR(50)
+
+-- TABLA GRUPO
+CREATE TABLE grupo (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT
 );
 
-CREATE TABLE foliada_grupo(
-foliada_id INT,
-grupo_id INT,
-PRIMARY KEY (foliada_id, grupo_id),
-FOREIGN KEY (foliada_id) REFERENCES foliada(foliada_id) ON DELETE CASCADE,
-FOREIGN KEY (grupo_id) REFERENCES grupo(grupo_id) ON DELETE CASCADE
+
+-- TABLA FOLIADA
+CREATE TABLE foliada (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(200) NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIMESTAMP,
+    lugar VARCHAR(200),
+    provincia VARCHAR(50),
+    descripcion TEXT,
+    latitude DOUBLE,
+    lonxitude DOUBLE,
+    imaxe VARCHAR(500)
 );
 
-CREATE TABLE favorita(
-favorita_id SERIAL PRIMARY KEY,
-usuario_id INT,
-foliada_id INT,
-FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id) ON DELETE CASCADE,
-FOREIGN KEY (foliada_id) REFERENCES foliada(foliada_id) ON DELETE CASCADE
+
+-- TABLA RELACION FOLIADA - GRUPO
+CREATE TABLE foliada_grupo (
+    foliada_id INT,
+    grupo_id INT,
+    PRIMARY KEY (foliada_id, grupo_id),
+    FOREIGN KEY (foliada_id) REFERENCES foliada(id) ON DELETE CASCADE,
+    FOREIGN KEY (grupo_id) REFERENCES grupo(id) ON DELETE CASCADE
 );
 
-INSERT INTO usuario (nombre_usuario, email, password)
-VALUES
-('foliadeiro1', 'usuario1@email.com', '123'),
-('foliadeiro2', 'usuario2@email.com', '123');
 
-INSERT INTO grupo (nombre, origen, tipo)
-VALUES
-('Cantareiras da Terra', 'Santiago', 'Cantareiras'),
-('Os Gaiteiros do Miño', 'Lugo', 'Gaitas'),
-('Fol da Chousa', 'Visantoña', 'Grupo Tradicional'),
-('Pandeireteiras de Vigo', 'Vigo', 'Pandereteiras');
 
-INSERT INTO foliada (nombre, fecha, hora, lugar, provincia, descripcion)
-VALUES
-(
-'Foliada de Melide',
-'2026-04-25',
-'12:00',
-'Melide',
-'A_CORUNA',
-'A foliada de melide e mito máis, é ensalzar a artesanía , cultura e tradición galega. Podrás disfrutar durante todo o fin de semana de: obradoiros de baile galego para nenos e adultos, mostra de artesanía e instrumentos, xigantes e cabezudos, sesión vermú, orquesta, xogos populares, exhibicion de baile e concertos'
-),
-(
-'Foliada de Lugo',
-'2026-07-10',
-'20:30',
-'Lugo centro histórico',
-'LUGO',
-'Encontro de grupos tradicionais.'
-),
-(
-'Foliada de Pontevedra',
-'2026-08-05',
-'22:00',
-'Praza da Ferrería',
-'PONTEVEDRA',
-'Foliada popular aberta a todo o público.'
-);
+-- USUARIOS
+INSERT INTO usuario (nombre, email, password) VALUES
+('Noelia', 'noelia@email.com', '1234'),
+('Carlos', 'carlos@email.com', '1234'),
+('Ana', 'ana@email.com', '1234');
 
-INSERT INTO foliada_grupo (foliada_id, grupo_id)
-VALUES
-(1,3),
-(1,2),
-(2,2),
-(3,1);
 
-INSERT INTO favorita (usuario_id, foliada_id)
-VALUES
+
+-- GRUPOS
+INSERT INTO grupo (nombre, descripcion) VALUES
+('Os Gaiteiros', 'Grupo tradicional de gaita galega'),
+('Cantareiras do Norte', 'Grupo de cantareiras tradicionais'),
+('Pandeireteiras da Terra', 'Grupo feminino de pandeireta');
+
+
+
+-- FOLIADAS
+INSERT INTO foliada (nombre, fecha, hora, lugar, provincia, descripcion, latitude, lonxitude, imaxe) VALUES
+('Foliada de Lugo', '2026-06-10', '2026-06-10 21:00:00', 'Praza Maior', 'LUGO',
+ 'Gran foliada tradicional', 43.012, -7.556, 'lugo.jpg'),
+
+('Foliada de Compostela', '2026-07-15', '2026-07-15 20:30:00', 'Praza do Obradoiro', 'A_CORUNA',
+ 'Foliada aberta a todo o mundo', 42.880, -8.545, 'compostela.jpg'),
+
+('Foliada de Ourense', '2026-08-05', '2026-08-05 22:00:00', 'Praza Maior', 'OURENSE',
+ 'Música tradicional e baile', 42.336, -7.864, 'ourense.jpg');
+
+
+
+-- RELACION FOLIADA - GRUPO
+INSERT INTO foliada_grupo (foliada_id, grupo_id) VALUES
 (1,1),
 (1,2),
-(2,3);
+(2,2),
+(2,3),
+(3,1);
