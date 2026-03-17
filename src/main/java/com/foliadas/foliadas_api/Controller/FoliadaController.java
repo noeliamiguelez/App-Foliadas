@@ -1,60 +1,35 @@
 package com.foliadas.foliadas_api.Controller;
 
-import com.foliadas.foliadas_api.Model.Foliada;
-import com.foliadas.foliadas_api.Model.Provincia;
-import com.foliadas.foliadas_api.Repository.FoliadaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.foliadas.foliadas_api.DTO.FoliadaDTO;
+import com.foliadas.foliadas_api.FoliadasApiApplication;
+import com.foliadas.foliadas_api.Service.FoliadaService;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/foliadas")
 public class FoliadaController {
 
-    @Autowired
-    private final FoliadaRepository foliadaRepository;
+    private final FoliadaService foliadaService;
 
-    public FoliadaController(FoliadaRepository foliadaRepository) {
-        this.foliadaRepository = foliadaRepository;
+    private static Logger LOG= LoggerFactory.getLogger(FoliadasApiApplication.class);
+
+    public FoliadaController(FoliadaService foliadaService) {
+        this.foliadaService = foliadaService;
     }
 
     @GetMapping
-    public List<Foliada> listarFoliadas() { return foliadaRepository.findAll(); }
+    public List<FoliadaDTO> getAll() {
+        return foliadaService.getAll();
+    }
 
     @GetMapping("/{id}")
-    public Optional<Foliada> listarPorId(@PathVariable int id) { return foliadaRepository.findById(id); }
-
-    @GetMapping("/buscar")
-    public List<Foliada> buscarFoliadas(@RequestParam String nombre) {
-        return foliadaRepository.findByNomeContainingIgnoreCase(nombre);
+    public ResponseEntity<FoliadaDTO> getById(@PathVariable int id) {
+        return foliadaService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-
-    @GetMapping("/provincia/{provincia}")
-    public List<Foliada> listarPorProvincia(@PathVariable String provincia) {
-        return foliadaRepository.findByProvincia(Provincia.valueOf(provincia.toUpperCase()));
-    }
-
-    @PostMapping("/añadir")
-    public Foliada crearFoliada(@RequestBody Foliada foliada) { return foliadaRepository.save(foliada); }
-
-    @PutMapping("/actualizar/{id}")
-    public Foliada actualizarFoliada(@PathVariable int id, @RequestBody Foliada nuevaFoliada) {
-        return foliadaRepository.findById(id)
-                .map(foliada -> {
-                    foliada.setNome(nuevaFoliada.getNome());
-                    foliada.setFecha(nuevaFoliada.getFecha());
-                    foliada.setHora(nuevaFoliada.getHora());
-                    foliada.setLugar(nuevaFoliada.getLugar());
-                    foliada.setProvincia(nuevaFoliada.getProvincia());
-                    foliada.setDescripcion(nuevaFoliada.getDescripcion());
-                    foliada.setLatitude(nuevaFoliada.getLatitude());
-                    foliada.setLonxitude(nuevaFoliada.getLonxitude());
-                    foliada.setImaxe(nuevaFoliada.getImaxe());
-                    return foliadaRepository.save(foliada);
-                }).orElseThrow(() -> new RuntimeException("Foliada no encontrada"));
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void eliminarFoliada(@PathVariable int id) { foliadaRepository.deleteById(id); }
 }

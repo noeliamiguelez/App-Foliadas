@@ -3,23 +3,53 @@ package com.foliadas.foliadas_api.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "favorita")
+@Table(name = "favorita", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"usuario_id", "foliada_id"})
+})
 public class Favorita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int favorita_id;
+    private int id;
 
-    private int usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
-    private int foliadaId;
+    @ManyToOne
+    @JoinColumn(name = "foliada_id", nullable = false)
+    private Foliada foliada;
 
-    public int getFavorita_id() { return favorita_id; }
-    public void setFavorita_id(int favorita_id) { this.favorita_id = favorita_id; }
+    public Favorita() {
+    }
 
-    public int getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(int usuarioId) { this.usuarioId = usuarioId; }
+    public Favorita(int id, Usuario usuario, Foliada foliada) {
+        this.id = id;
+        this.usuario = usuario;
+        this.foliada = foliada;
+    }
 
-    public int getFoliadaId() { return foliadaId; }
-    public void setFoliadaId(int foliadaId) { this.foliadaId = foliadaId; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Foliada getFoliada() {
+        return foliada;
+    }
+
+    public void setFoliada(Foliada foliada) {
+        this.foliada = foliada;
+    }
 }

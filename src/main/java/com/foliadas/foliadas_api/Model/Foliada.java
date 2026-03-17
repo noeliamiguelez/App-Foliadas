@@ -3,6 +3,8 @@ package com.foliadas.foliadas_api.Model;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Table(name="foliada")
@@ -12,15 +14,20 @@ public class Foliada {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "nome",nullable = false, length = 150)
     private String nome;
 
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
-    private Timestamp hora;
+    @Column(name = "hora")
+    private LocalTime hora;
 
+    @Column(name = "lugar", length = 150)
     private String lugar;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToMany
+    @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
     @Column(columnDefinition = "TEXT")
@@ -32,35 +39,127 @@ public class Foliada {
 
     private Double lonxitude;
 
+    @OneToMany(mappedBy = "foliada")
+    private Set<Foliada> foliadas;
+
+    @ManyToMany
+    @JoinTable(
+            name= "foliada_grupo",
+            joinColumns = @JoinColumn(name = "foliada_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupo_id")
+    )
+    private Set<Grupo> grupos;
+
     public Foliada() {}
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Foliada(int id, String nome, LocalDate fecha, LocalTime hora, String lugar, Provincia provincia, String descripcion, String imaxe, Double latitude, Double lonxitude, Set<Foliada> foliadas, Set<Grupo> grupos) {
+        this.id = id;
+        this.nome = nome;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.lugar = lugar;
+        this.provincia = provincia;
+        this.descripcion = descripcion;
+        this.imaxe = imaxe;
+        this.latitude = latitude;
+        this.lonxitude = lonxitude;
+        this.foliadas = foliadas;
+        this.grupos = grupos;
+    }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public int getId() {
+        return id;
+    }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public Timestamp getHora() { return hora; }
-    public void setHora(Timestamp hora) { this.hora = hora; }
+    public String getNome() {
+        return nome;
+    }
 
-    public String getLugar() { return lugar; }
-    public void setLugar(String lugar) { this.lugar = lugar; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public Provincia getProvincia() { return provincia; }
-    public void setProvincia(Provincia provincia) { this.provincia = provincia; }
+    public LocalDate getFecha() {
+        return fecha;
+    }
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
 
-    public String getImaxe() { return imaxe; }
-    public void setImaxe(String imaxe) { this.imaxe = imaxe; }
+    public LocalTime getHora() {
+        return hora;
+    }
 
-    public Double getLatitude() { return latitude; }
-    public void setLatitude(Double latitude) { this.latitude = latitude; }
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
 
-    public Double getLonxitude() { return lonxitude; }
-    public void setLonxitude(Double lonxitude) { this.lonxitude = lonxitude; }
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getImaxe() {
+        return imaxe;
+    }
+
+    public void setImaxe(String imaxe) {
+        this.imaxe = imaxe;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLonxitude() {
+        return lonxitude;
+    }
+
+    public void setLonxitude(Double lonxitude) {
+        this.lonxitude = lonxitude;
+    }
+
+    public Set<Foliada> getFoliadas() {
+        return foliadas;
+    }
+
+    public void setFoliadas(Set<Foliada> foliadas) {
+        this.foliadas = foliadas;
+    }
+
+    public Set<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(Set<Grupo> grupos) {
+        this.grupos = grupos;
+    }
 }

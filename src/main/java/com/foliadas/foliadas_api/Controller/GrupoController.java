@@ -1,8 +1,11 @@
 package com.foliadas.foliadas_api.Controller;
 
+import com.foliadas.foliadas_api.DTO.GrupoDTO;
 import com.foliadas.foliadas_api.Model.Grupo;
 import com.foliadas.foliadas_api.Repository.GrupoRepository;
+import com.foliadas.foliadas_api.Service.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -12,35 +15,31 @@ import java.util.Optional;
 public class GrupoController {
 
     @Autowired
-    private final GrupoRepository grupoRepository;
+    private final GrupoService grupoService;
 
-    public GrupoController(GrupoRepository grupoRepository) { this.grupoRepository = grupoRepository; }
+    public GrupoController(GrupoService grupoService) {
+        this.grupoService = grupoService;
+    }
 
     @GetMapping
-    public List<Grupo> getGrupos() { return grupoRepository.findAll(); }
+    public ResponseEntity<List<GrupoDTO>> getAllGrupos() {
+        return ResponseEntity.ok(grupoService.getALl());
+    }
 
     @GetMapping("/{id}")
-    public Optional<Grupo> findGrupoById(@PathVariable int id) { return grupoRepository.findById(id); }
-
-    @GetMapping("/buscar")
-    public List<Grupo> findGrupoByNombre(@RequestParam String nombre) {
-        return grupoRepository.findByNomeContainingIgnoreCase(nombre);
+    public ResponseEntity<GrupoDTO> getGrupoById(@PathVariable int id) {
+        return ResponseEntity.ok(grupoService.getById(id));
     }
 
-    @PostMapping("/añadir")
-    public Grupo crearGrupo(@RequestBody Grupo grupo) { return grupoRepository.save(grupo); }
-
-    @PutMapping("/actualizar/{id}")
-    public Grupo actualizarGrupo(@PathVariable int id, @RequestBody Grupo nuevoGrupo) {
-        return grupoRepository.findById(id)
-                .map(grupo -> {
-                    grupo.setNome(nuevoGrupo.getNome());
-                    grupo.setOrixen(nuevoGrupo.getOrixen());
-                    grupo.setTipo(nuevoGrupo.getTipo());
-                    return grupoRepository.save(grupo);
-                }).orElseThrow(() -> new RuntimeException("Grupo no encontrado"));
+    @PostMapping
+    public ResponseEntity<GrupoDTO> createGrupo(@RequestBody GrupoDTO grupoDTO) {
+        return ResponseEntity.ok(grupoService.create(grupoDTO));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void eliminarGrupo(@PathVariable int id) { grupoRepository.deleteById(id); }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGrupo(@PathVariable int id) {
+        grupoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

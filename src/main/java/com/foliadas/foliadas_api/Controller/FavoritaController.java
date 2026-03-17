@@ -1,9 +1,12 @@
 package com.foliadas.foliadas_api.Controller;
 
-import com.foliadas.foliadas_api.Model.Favorita;
-import com.foliadas.foliadas_api.Repository.FavoritaRepository;
+
+import com.foliadas.foliadas_api.DTO.FavoritaDTO;
+import com.foliadas.foliadas_api.Service.FavoritaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -11,27 +14,25 @@ import java.util.List;
 public class FavoritaController {
 
     @Autowired
-    private final FavoritaRepository favoritaRepository;
+    private final FavoritaService favoritaService;
 
-    public FavoritaController(FavoritaRepository favoritaRepository) {
-        this.favoritaRepository = favoritaRepository;
+    public FavoritaController(FavoritaService favoritaService) {
+        this.favoritaService = favoritaService;
     }
 
     @GetMapping
-    public List<Favorita> findAll() { return favoritaRepository.findAll(); }
-
-    @GetMapping("usuario/{usuario_id}")
-    public List<Favorita> getFavoritasUsuario(@PathVariable int usuario_id) {
-        return favoritaRepository.findByUsuarioId(usuario_id);
+    public ResponseEntity<List<FavoritaDTO>> getAllFavoritas() {
+        return ResponseEntity.ok(favoritaService.getAll());
     }
 
-    @PostMapping("/guardar/{id}")
-    public Favorita guardarFavorita(@RequestBody Favorita favorita) {
-        return favoritaRepository
-                .findByUsuarioIdAndFoliadaId(favorita.getUsuarioId(), favorita.getFoliadaId())
-                .orElseGet(() -> favoritaRepository.save(favorita));
+    @PostMapping
+    public ResponseEntity<FavoritaDTO> createFavorita(@RequestBody FavoritaDTO favoritaDTO) {
+        return ResponseEntity.ok(favoritaService.create(favoritaDTO));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void eliminarFavorita(@PathVariable int id) { favoritaRepository.deleteById(id); }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFavorita(@PathVariable int id) {
+        favoritaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
