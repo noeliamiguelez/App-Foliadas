@@ -13,23 +13,34 @@ import java.util.logging.Logger;
 @RequestMapping("/foliadas")
 public class FoliadaController {
 
-    private final FoliadaService foliadaService;
+        private final FoliadaService foliadaService;
 
-    private static Logger LOG= LoggerFactory.getLogger(FoliadasApiApplication.class);
+        public FoliadaController(FoliadaService foliadaService) {
+            this.foliadaService = foliadaService;
+        }
 
-    public FoliadaController(FoliadaService foliadaService) {
-        this.foliadaService = foliadaService;
-    }
+        // 🔹 GET todas las foliadas
+        @GetMapping
+        public ResponseEntity<List<FoliadaDTO>> getAllFoliadas() {
+            return ResponseEntity.ok(foliadaService.getAll());
+        }
 
-    @GetMapping
-    public List<FoliadaDTO> getAll() {
-        return foliadaService.getAll();
-    }
+        // 🔹 GET foliada por ID
+        @GetMapping("/{id}")
+        public ResponseEntity<FoliadaDTO> getFoliadaById(@PathVariable int id) {
+            return ResponseEntity.ok(foliadaService.getById(id));
+        }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<FoliadaDTO> getById(@PathVariable int id) {
-        return foliadaService.getById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+        // 🔹 POST crear nueva foliada
+        @PostMapping
+        public ResponseEntity<FoliadaDTO> createFoliada(@RequestBody FoliadaDTO foliadaDTO) {
+            return ResponseEntity.ok(foliadaService.create(foliadaDTO));
+        }
+
+        // 🔹 DELETE eliminar foliada
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deleteFoliada(@PathVariable int id) {
+            foliadaService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
 }
