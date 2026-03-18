@@ -8,6 +8,7 @@ import com.foliadas.foliadas_api.Repository.UsuarioRepository;
 import com.foliadas.foliadas_api.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +39,20 @@ public class UsuarioController {
     @PostMapping("/create")
     public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioDTO usuarioDTO) {
         return ResponseEntity.ok(usuarioService.create(usuarioDTO));
+    }
+
+    @GetMapping("/nuevo")
+    public String mostrarFormularioUsuario(Model model) {
+        model.addAttribute("usuarioDTO", new UsuarioDTO());
+        return "usuarios/crear";
+    }
+
+    // Recibir formulario de creación
+    @PostMapping("/nuevo")
+    public String crearUsuario(@ModelAttribute UsuarioDTO usuarioDTO, Model model) {
+        usuarioService.create(usuarioDTO);
+        model.addAttribute("mensaje", "Usuario creado con éxito: " + usuarioDTO.getNombre());
+        return "usuarios/resultadoUsuario";
     }
 
     @DeleteMapping("/{id}")
