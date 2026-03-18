@@ -34,16 +34,4 @@ public class ProvinciaServiceImpl implements ProvinciaService{
         return new ProvinciaDTO(provincia.getId(), provincia.getNombre());
     }
 
-    @Override
-    public ProvinciaDTO create(ProvinciaDTO provinciaDTO) {
-        Provincia provincia= new Provincia();
-        provincia.setNombre(provinciaDTO.getNombre());
-        Provincia saved= provinciaRepository.save(provincia);
-        return new ProvinciaDTO(saved.getId(), saved.getNombre());
-    }
-
-    @Override
-    public void delete(int id) {
-        provinciaRepository.deleteById(id);
-    }
 }

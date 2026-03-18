@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -47,9 +48,13 @@ public class Foliada {
     )
     private Set<Grupo> grupos;
 
+    @ManyToMany(mappedBy = "favoritas")
+    private Set<Usuario> usarios= new HashSet<>();
+
+
     public Foliada() {}
 
-    public Foliada(int id, String nome, LocalDate fecha, LocalTime hora, String lugar, Provincia provincia, String descripcion, String imaxe, Double latitude, Double lonxitude, Set<Grupo> grupos) {
+    public Foliada(int id, String nome, LocalDate fecha, LocalTime hora, String lugar, Provincia provincia, String descripcion, String imaxe, Double latitude, Double lonxitude, Set<Grupo> grupos, Set<Usuario> usarios) {
         this.id = id;
         this.nome = nome;
         this.fecha = fecha;
@@ -61,6 +66,15 @@ public class Foliada {
         this.latitude = latitude;
         this.lonxitude = lonxitude;
         this.grupos = grupos;
+        this.usarios = usarios;
+    }
+
+    public Set<Usuario> getUsarios() {
+        return usarios;
+    }
+
+    public void setUsarios(Set<Usuario> usarios) {
+        this.usarios = usarios;
     }
 
     public int getId() {

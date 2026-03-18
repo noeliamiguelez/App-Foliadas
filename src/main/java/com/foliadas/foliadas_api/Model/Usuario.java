@@ -2,7 +2,9 @@ package com.foliadas.foliadas_api.Model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
@@ -24,17 +26,23 @@ public class Usuario {
     @Column(name = "fecha_rexistro")
     private LocalDateTime fecha_rexistro;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Favorita> favoritas;
+    @ManyToMany
+    @JoinTable(
+            name = "favorita",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "foliada_id")
+    )
+    private Set<Foliada> favoritas= new HashSet<>();
 
     public Usuario() {}
 
-    public Usuario(int id, String nome, String email, String contrasinal, LocalDateTime fecha_rexistro) {
+    public Usuario(int id, String nome, String email, String contrasinal, LocalDateTime fecha_rexistro, Set<Foliada> favoritas) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.contrasinal = contrasinal;
         this.fecha_rexistro = fecha_rexistro;
+        this.favoritas = favoritas;
     }
 
     public int getId() {
@@ -47,6 +55,14 @@ public class Usuario {
 
     public String getNome() {
         return nome;
+    }
+
+    public Set<Foliada> getFavoritas() {
+        return favoritas;
+    }
+
+    public void setFavoritas(Set<Foliada> favoritas) {
+        this.favoritas = favoritas;
     }
 
     public void setNome(String nome) {

@@ -2,6 +2,7 @@ package com.foliadas.foliadas_api.Controller;
 
 import com.foliadas.foliadas_api.DTO.FoliadaDTO;
 import com.foliadas.foliadas_api.FoliadasApiApplication;
+import com.foliadas.foliadas_api.Model.Foliada;
 import com.foliadas.foliadas_api.Service.FoliadaService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,20 @@ public class FoliadaController {
         public ResponseEntity<Void> delete(@PathVariable int id) {
             foliadaService.delete(id);
             return ResponseEntity.noContent().build();
+        }
+
+        @PutMapping("/{id}")
+         public Foliada update(@PathVariable int id, @RequestBody Foliada foliada){
+            return foliadaService.update(id, foliada);
+        }
+
+        @GetMapping("/provincia/{provinciaId}")
+        public List<Foliada> getByProvincia(@PathVariable int provinciaId){
+            return foliadaService.getByProvincia(provinciaId);
+        }
+
+        @GetMapping("/buscar")
+        public List<Foliada> getByNome(@RequestParam String nome){
+            return foliadaService.getByNome(nome);
         }
 }

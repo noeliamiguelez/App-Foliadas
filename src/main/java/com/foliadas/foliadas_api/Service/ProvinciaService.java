@@ -8,7 +8,5 @@ public interface ProvinciaService {
 
     List<ProvinciaDTO> getAll();
     ProvinciaDTO getById(int id);
-    ProvinciaDTO create(ProvinciaDTO provinciaDTO);
-    void delete(int id);
 
 }

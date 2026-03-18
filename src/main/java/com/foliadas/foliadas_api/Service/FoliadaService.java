@@ -2,6 +2,7 @@ package com.foliadas.foliadas_api.Service;
 
 
 import com.foliadas.foliadas_api.DTO.FoliadaDTO;
+import com.foliadas.foliadas_api.Model.Foliada;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public interface FoliadaService {
     FoliadaDTO getById(int id);
     FoliadaDTO create(FoliadaDTO foliadaDTO);
     void delete(int id);
+    Foliada update(int id, Foliada foliada);
+
+    List<Foliada> getByProvincia(int provinciaId);
+    List<Foliada> getByNome(String nome);
 
 }

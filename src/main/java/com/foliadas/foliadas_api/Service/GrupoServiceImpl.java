@@ -46,4 +46,17 @@ public class GrupoServiceImpl implements GrupoService{
     public void delete(int id) {
         grupoRepository.deleteById(id);
     }
+
+    @Override
+    public Grupo update(int id, Grupo grupo) {
+        Grupo existente= grupoRepository.findById(id).orElse(null);
+        if (existente==null){
+            return null;
+        }
+        existente.setNome(grupo.getNome());
+        existente.setTipo(grupo.getTipo());
+        existente.setOrixen(grupo.getOrixen());
+
+        return grupoRepository.save(existente);
+    }
 }

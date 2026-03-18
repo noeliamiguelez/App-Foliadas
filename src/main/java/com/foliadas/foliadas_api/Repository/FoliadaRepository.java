@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface FoliadaRepository extends JpaRepository<Foliada, Integer> {
-    List<Foliada> findByProvincia(Provincia provincia);
+    List<Foliada> findByProvincia_Id(int  provinciaId);
     List<Foliada> findByNomeContainingIgnoreCase(String nome);
 }

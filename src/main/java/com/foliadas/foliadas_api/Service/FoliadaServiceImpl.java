@@ -12,6 +12,7 @@ import com.foliadas.foliadas_api.Repository.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -73,6 +74,53 @@ public class FoliadaServiceImpl implements FoliadaService{
         foliadaRepository.deleteById(id);
     }
 
+    @Override
+    public Foliada update(int id, Foliada foliada) {
+        Foliada existente= foliadaRepository.findById(id).orElse(null);
+
+        if (existente==null){
+            return null;
+        }
+        existente.setNome(foliada.getNome());
+        existente.setFecha(foliada.getFecha());
+        existente.setHora(foliada.getHora());
+        existente.setLugar(foliada.getLugar());
+        existente.setDescripcion(foliada.getDescripcion());
+        existente.setLatitude(foliada.getLatitude());
+        existente.setLonxitude(foliada.getLonxitude());
+        existente.setImaxe(foliada.getImaxe());
+
+        if (foliada.getProvincia() != null){
+            int provinciaId= foliada.getProvincia().getId();
+            Provincia provincia= provinciaRepository.findById(provinciaId).orElse(null);
+            existente.setProvincia(provincia);
+        }
+
+        if (foliada.getGrupos() != null){
+            Set<Grupo> gruposActualizados = new HashSet<>();
+
+            for (Grupo g: foliada.getGrupos()){
+                Grupo grupo= grupoRepository.findById(g.getGrupo_id()).orElse(null);
+                if (grupo!=null){
+                    gruposActualizados.add(grupo);
+                }
+            }
+            existente.setGrupos(gruposActualizados);
+        }
+        return foliadaRepository.save(existente);
+
+    }
+
+    @Override
+    public List<Foliada> getByProvincia(int provinciaId) {
+        return foliadaRepository.findByProvincia_Id(provinciaId);
+    }
+
+    @Override
+    public List<Foliada> getByNome(String nome) {
+        return foliadaRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
     private FoliadaDTO toDTO(Foliada f){
         FoliadaDTO dto= new FoliadaDTO();
         dto.setNombre(f.getNome());
@@ -90,4 +138,6 @@ public class FoliadaServiceImpl implements FoliadaService{
 
         return dto;
     }
+
+
 }

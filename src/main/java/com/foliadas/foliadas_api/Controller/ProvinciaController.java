@@ -27,15 +27,4 @@ public class ProvinciaController {
         return ResponseEntity.ok(provinciaService.getById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<ProvinciaDTO> create(@RequestBody ProvinciaDTO provinciaDTO) {
-        return ResponseEntity.ok(provinciaService.create(provinciaDTO));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id) {
-        provinciaService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }

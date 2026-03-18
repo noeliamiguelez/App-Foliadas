@@ -42,4 +42,9 @@ public class GrupoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public Grupo update(@PathVariable int id, @RequestBody Grupo grupo){
+        return grupoService.update(id, grupo);
+        }
+
 }

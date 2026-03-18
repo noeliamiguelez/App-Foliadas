@@ -12,5 +12,6 @@ public interface GrupoService {
     GrupoDTO getById(int id);
     GrupoDTO create(GrupoDTO grupoDTO);
     void delete(int id);
+    Grupo update(int id, Grupo grupo);
 
 }
