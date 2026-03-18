@@ -51,12 +51,12 @@ public class FoliadaController {
         }
 
         @GetMapping("/provincia/{provinciaId}")
-        public List<Foliada> getByProvincia(@PathVariable int provinciaId){
+        public List<FoliadaDTO> getByProvincia(@PathVariable int provinciaId){
             return foliadaService.getByProvincia(provinciaId);
         }
 
-        @GetMapping("/buscar")
-        public List<Foliada> getByNome(@RequestParam String nome){
+        @GetMapping("/buscar/{nome}")
+        public List<FoliadaDTO> getByNome(@PathVariable String nome){
             return foliadaService.getByNome(nome);
         }
 }

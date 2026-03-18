@@ -1,5 +1,6 @@
 package com.foliadas.foliadas_api.Controller;
 
+import com.foliadas.foliadas_api.DTO.FoliadaDTO;
 import com.foliadas.foliadas_api.DTO.UsuarioDTO;
 import com.foliadas.foliadas_api.Model.Foliada;
 import com.foliadas.foliadas_api.Model.Usuario;
@@ -34,7 +35,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.getById(id));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioDTO usuarioDTO) {
         return ResponseEntity.ok(usuarioService.create(usuarioDTO));
     }
@@ -55,7 +56,7 @@ public class UsuarioController {
      ------------------------------------------*/
 
     @GetMapping("/{id}/favoritas")
-    public Set<Foliada> getFavoritas(@PathVariable int id){
+    public Set<FoliadaDTO> getFavoritas(@PathVariable int id){
         return usuarioService.getFavoritas(id);
     }
 

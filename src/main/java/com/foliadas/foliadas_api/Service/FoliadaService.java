@@ -14,7 +14,7 @@ public interface FoliadaService {
     void delete(int id);
     Foliada update(int id, Foliada foliada);
 
-    List<Foliada> getByProvincia(int provinciaId);
-    List<Foliada> getByNome(String nome);
+    List<FoliadaDTO> getByProvincia(int provinciaId);
+    List<FoliadaDTO> getByNome(String nome);
 
 }

@@ -112,13 +112,15 @@ public class FoliadaServiceImpl implements FoliadaService{
     }
 
     @Override
-    public List<Foliada> getByProvincia(int provinciaId) {
-        return foliadaRepository.findByProvincia_Id(provinciaId);
+    public List<FoliadaDTO> getByProvincia(int provinciaId) {
+        return foliadaRepository.findByProvincia_Id(provinciaId)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public List<Foliada> getByNome(String nome) {
-        return foliadaRepository.findByNomeContainingIgnoreCase(nome);
+    public List<FoliadaDTO> getByNome(String nome) {
+        return foliadaRepository.findByNomeContainingIgnoreCase(nome)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     private FoliadaDTO toDTO(Foliada f){
