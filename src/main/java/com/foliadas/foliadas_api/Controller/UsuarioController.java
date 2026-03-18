@@ -27,7 +27,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.getAll());
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> getById(@PathVariable int id){
         return ResponseEntity.ok(usuarioService.getById(id));
     }

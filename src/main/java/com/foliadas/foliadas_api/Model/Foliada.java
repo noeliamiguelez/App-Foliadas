@@ -26,8 +26,8 @@ public class Foliada {
     @Column(name = "lugar", length = 150)
     private String lugar;
 
-    @ManyToMany
-    @JoinColumn(name = "provincia_id")
+    @ManyToOne
+    @JoinColumn(name = "provincia_id", nullable = false)
     private Provincia provincia;
 
     @Column(columnDefinition = "TEXT")
@@ -39,9 +39,6 @@ public class Foliada {
 
     private Double lonxitude;
 
-    @OneToMany(mappedBy = "foliada")
-    private Set<Foliada> foliadas;
-
     @ManyToMany
     @JoinTable(
             name= "foliada_grupo",
@@ -52,7 +49,7 @@ public class Foliada {
 
     public Foliada() {}
 
-    public Foliada(int id, String nome, LocalDate fecha, LocalTime hora, String lugar, Provincia provincia, String descripcion, String imaxe, Double latitude, Double lonxitude, Set<Foliada> foliadas, Set<Grupo> grupos) {
+    public Foliada(int id, String nome, LocalDate fecha, LocalTime hora, String lugar, Provincia provincia, String descripcion, String imaxe, Double latitude, Double lonxitude, Set<Grupo> grupos) {
         this.id = id;
         this.nome = nome;
         this.fecha = fecha;
@@ -63,7 +60,6 @@ public class Foliada {
         this.imaxe = imaxe;
         this.latitude = latitude;
         this.lonxitude = lonxitude;
-        this.foliadas = foliadas;
         this.grupos = grupos;
     }
 
@@ -145,14 +141,6 @@ public class Foliada {
 
     public void setLonxitude(Double lonxitude) {
         this.lonxitude = lonxitude;
-    }
-
-    public Set<Foliada> getFoliadas() {
-        return foliadas;
-    }
-
-    public void setFoliadas(Set<Foliada> foliadas) {
-        this.foliadas = foliadas;
     }
 
     public Set<Grupo> getGrupos() {

@@ -21,25 +21,25 @@ public class FoliadaController {
 
         // 🔹 GET todas las foliadas
         @GetMapping
-        public ResponseEntity<List<FoliadaDTO>> getAllFoliadas() {
+        public ResponseEntity<List<FoliadaDTO>> getAll() {
             return ResponseEntity.ok(foliadaService.getAll());
         }
 
         // 🔹 GET foliada por ID
         @GetMapping("/{id}")
-        public ResponseEntity<FoliadaDTO> getFoliadaById(@PathVariable int id) {
+        public ResponseEntity<FoliadaDTO> getById(@PathVariable int id) {
             return ResponseEntity.ok(foliadaService.getById(id));
         }
 
         // 🔹 POST crear nueva foliada
         @PostMapping
-        public ResponseEntity<FoliadaDTO> createFoliada(@RequestBody FoliadaDTO foliadaDTO) {
+        public ResponseEntity<FoliadaDTO> create(@RequestBody FoliadaDTO foliadaDTO) {
             return ResponseEntity.ok(foliadaService.create(foliadaDTO));
         }
 
         // 🔹 DELETE eliminar foliada
         @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteFoliada(@PathVariable int id) {
+        public ResponseEntity<Void> delete(@PathVariable int id) {
             foliadaService.delete(id);
             return ResponseEntity.noContent().build();
         }

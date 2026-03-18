@@ -22,22 +22,22 @@ public class GrupoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GrupoDTO>> getAllGrupos() {
+    public ResponseEntity<List<GrupoDTO>> getAll() {
         return ResponseEntity.ok(grupoService.getALl());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GrupoDTO> getGrupoById(@PathVariable int id) {
+    public ResponseEntity<GrupoDTO> getById(@PathVariable int id) {
         return ResponseEntity.ok(grupoService.getById(id));
     }
 
     @PostMapping
-    public ResponseEntity<GrupoDTO> createGrupo(@RequestBody GrupoDTO grupoDTO) {
+    public ResponseEntity<GrupoDTO> create(@RequestBody GrupoDTO grupoDTO) {
         return ResponseEntity.ok(grupoService.create(grupoDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGrupo(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         grupoService.delete(id);
         return ResponseEntity.noContent().build();
     }

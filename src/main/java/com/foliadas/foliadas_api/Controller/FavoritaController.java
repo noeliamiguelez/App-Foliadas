@@ -21,17 +21,17 @@ public class FavoritaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FavoritaDTO>> getAllFavoritas() {
+    public ResponseEntity<List<FavoritaDTO>> getAll() {
         return ResponseEntity.ok(favoritaService.getAll());
     }
 
     @PostMapping
-    public ResponseEntity<FavoritaDTO> createFavorita(@RequestBody FavoritaDTO favoritaDTO) {
+    public ResponseEntity<FavoritaDTO> create(@RequestBody FavoritaDTO favoritaDTO) {
         return ResponseEntity.ok(favoritaService.create(favoritaDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFavorita(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         favoritaService.delete(id);
         return ResponseEntity.noContent().build();
     }

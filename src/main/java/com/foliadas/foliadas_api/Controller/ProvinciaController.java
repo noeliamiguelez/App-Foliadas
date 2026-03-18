@@ -18,22 +18,22 @@ public class ProvinciaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProvinciaDTO>> getAllProvincias() {
+    public ResponseEntity<List<ProvinciaDTO>> getAll() {
         return ResponseEntity.ok(provinciaService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProvinciaDTO> getProvinciaById(@PathVariable int id) {
+    public ResponseEntity<ProvinciaDTO> getById(@PathVariable int id) {
         return ResponseEntity.ok(provinciaService.getById(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProvinciaDTO> createProvincia(@RequestBody ProvinciaDTO provinciaDTO) {
+    public ResponseEntity<ProvinciaDTO> create(@RequestBody ProvinciaDTO provinciaDTO) {
         return ResponseEntity.ok(provinciaService.create(provinciaDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProvincia(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         provinciaService.delete(id);
         return ResponseEntity.noContent().build();
     }
