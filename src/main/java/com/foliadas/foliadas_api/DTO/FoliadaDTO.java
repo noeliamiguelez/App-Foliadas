@@ -2,6 +2,7 @@ package com.foliadas.foliadas_api.DTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Set;
 
 public class FoliadaDTO {
@@ -15,10 +16,25 @@ public class FoliadaDTO {
     private Double latitude;
     private Double lonxitude;
     private String imaxe;
+
     private ProvinciaDTO provincia;
-    private Set<GrupoDTO> grupos;
+
+    private Set<GrupoDTO> grupos= new HashSet<>();
 
     public FoliadaDTO() {
+    }
+
+    public FoliadaDTO(int id, String nombre, LocalTime hora, LocalDate fecha, String lugar, String descripcion, Double latitude, Double lonxitude, String imaxe, ProvinciaDTO provincia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.hora = hora;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.descripcion = descripcion;
+        this.latitude = latitude;
+        this.lonxitude = lonxitude;
+        this.imaxe = imaxe;
+        this.provincia = provincia;
     }
 
     public int getId() {
