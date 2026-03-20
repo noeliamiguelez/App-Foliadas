@@ -41,6 +41,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.create(usuarioDTO));
     }
 
+    // Mostrar formulario de crear usuario
     @GetMapping("/nuevo")
     public String mostrarFormularioUsuario(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
