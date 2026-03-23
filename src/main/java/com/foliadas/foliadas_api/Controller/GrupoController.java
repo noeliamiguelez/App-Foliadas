@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/grupos")
+@RequestMapping("api/grupos")
 public class GrupoController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class GrupoController {
 
     @GetMapping
     public ResponseEntity<List<GrupoDTO>> getAll() {
-        return ResponseEntity.ok(grupoService.getALl());
+        return ResponseEntity.ok(grupoService.getAll());
     }
 
     @GetMapping("/{id}")
@@ -43,8 +43,8 @@ public class GrupoController {
     }
 
     @PutMapping("/{id}")
-    public Grupo update(@PathVariable int id, @RequestBody Grupo grupo){
-        return grupoService.update(id, grupo);
+    public GrupoDTO update(@PathVariable int id, @RequestBody GrupoDTO grupoDTO){
+        return grupoService.update(id, grupoDTO);
         }
 
 }

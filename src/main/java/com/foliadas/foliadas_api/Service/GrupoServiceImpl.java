@@ -20,7 +20,7 @@ public class GrupoServiceImpl implements GrupoService{
     }
 
     @Override
-    public List<GrupoDTO> getALl() {
+    public List<GrupoDTO> getAll() {
         return grupoRepository.findAll().stream()
                 .map(grupo -> new GrupoDTO(grupo.getGrupo_id(), grupo.getNome(), grupo.getTipo(), grupo.getOrixen()))
                 .collect(Collectors.toList());
@@ -47,16 +47,14 @@ public class GrupoServiceImpl implements GrupoService{
         grupoRepository.deleteById(id);
     }
 
-    @Override
-    public Grupo update(int id, Grupo grupo) {
-        Grupo existente= grupoRepository.findById(id).orElse(null);
-        if (existente==null){
-            return null;
-        }
-        existente.setNome(grupo.getNome());
-        existente.setTipo(grupo.getTipo());
-        existente.setOrixen(grupo.getOrixen());
 
-        return grupoRepository.save(existente);
+    @Override
+    public GrupoDTO update(int id, GrupoDTO grupoDTO) {
+        Grupo existente = grupoRepository.findById(id).orElseThrow(() -> new RuntimeException("Grupo no encontrado"));
+        existente.setNome(grupoDTO.getNombre());
+        existente.setTipo(grupoDTO.getTipo());
+        existente.setOrixen(grupoDTO.getOrixen());
+        Grupo actualizado = grupoRepository.save(existente);
+        return new GrupoDTO(actualizado.getGrupo_id(), actualizado.getNome(), actualizado.getTipo(), actualizado.getOrixen());
     }
 }
