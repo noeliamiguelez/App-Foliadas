@@ -1,7 +1,6 @@
 package com.foliadas.foliadas_api.Controller;
 
 import com.foliadas.foliadas_api.DTO.GrupoDTO;
-import com.foliadas.foliadas_api.Model.Grupo;
 import com.foliadas.foliadas_api.Service.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

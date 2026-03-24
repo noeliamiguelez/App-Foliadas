@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/foliadas")
+@RequestMapping("api/foliadas")
 public class FoliadaController {
 
         private final FoliadaService foliadaService;
