@@ -10,6 +10,7 @@ public class Grupo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int grupo_id;
 
     private String nome;

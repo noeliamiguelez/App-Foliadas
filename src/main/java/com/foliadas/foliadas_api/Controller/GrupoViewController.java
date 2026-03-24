@@ -17,7 +17,7 @@ public class GrupoViewController {
 
     @GetMapping("/nuevo")
     public String nuevoGrupo(Model model){
-        model.addAttribute("grupo", new GrupoDTO());
+        model.addAttribute("grupos", new GrupoDTO());
         return "grupos-form.html";
     }
 
@@ -29,14 +29,14 @@ public class GrupoViewController {
 
     @GetMapping("/lista")
     public String listarGrupos(Model model){
-        model.addAttribute("grupo", grupoService.getAll());
+        model.addAttribute("grupos", grupoService.getAll());
         return "grupos-lista.html";
     }
 
     @GetMapping("/editar/{id}")
     public String editarGrupo(@PathVariable int id, Model model){
         GrupoDTO grupo= grupoService.getById(id);
-        model.addAttribute("grupo", grupo);
+        model.addAttribute("grupos", grupo);
         return "grupos-form.html";
     }
 
