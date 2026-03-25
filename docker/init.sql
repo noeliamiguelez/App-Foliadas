@@ -98,7 +98,6 @@ INSERT INTO foliada (nome, fecha, hora, lugar, descripcion, latitude, lonxitude,
 ALTER SEQUENCE usuario_id_seq RESTART WITH 1;
 ALTER SEQUENCE grupo_id_seq RESTART WITH 1;
 ALTER SEQUENCE foliada_id_seq RESTART WITH 1;
-ALTER SEQUENCE favorita_id_seq RESTART WITH 1;
 
 -- ========================================
 -- INSERTAR VALORES EN FAVORITA Y FOLIADA_GRUPO
@@ -129,9 +128,6 @@ INSERT INTO foliada_grupo (foliada_id, grupo_id) VALUES
 -- ========================================
 
 -- Solo necesario si la tabla ya existía y quieres reiniciar IDs
-ALTER SEQUENCE usuario_id_seq RESTART WITH 1;
-ALTER SEQUENCE grupo_id_seq RESTART WITH 1;
-ALTER SEQUENCE foliada_id_seq RESTART WITH 1;
 ALTER SEQUENCE favorita_id_seq RESTART WITH 1;
 
 --borrar columna que sobra:
