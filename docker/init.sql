@@ -58,43 +58,54 @@ CREATE TABLE foliada_grupo(
                                   REFERENCES grupo(id) ON DELETE CASCADE
 );
 
--- ========================================
--- DATOS
--- ========================================
-
--- Provincias
+-- Provincias (IDs fijos)
 INSERT INTO provincia (id, nombre) VALUES
                                        (1, 'A Coruña'),
                                        (2, 'Lugo'),
                                        (3, 'Ourense'),
                                        (4, 'Pontevedra');
 
--- Usuarios
-INSERT INTO usuario (id, nome, email, password) VALUES
-                                                    (1, 'Admin', 'admin@foliadas.com', '1234'),
-                                                    (2, 'Laura Gómez', 'laura@gmail.com', '1234'),
-                                                    (3, 'Carlos Pérez', 'carlos@gmail.com', '1234'),
-                                                    (4, 'Ana López', 'ana@gmail.com', '1234');
+-- Usuarios (IDs automáticos)
+INSERT INTO usuario (nome, email, password) VALUES
+                                                ('Admin', 'admin@foliadas.com', '1234'),
+                                                ('Laura Gómez', 'laura@gmail.com', '1234'),
+                                                ('Carlos Pérez', 'carlos@gmail.com', '1234'),
+                                                ('Ana López', 'ana@gmail.com', '1234');
 
--- Grupos
-INSERT INTO grupo (id, nome, tipo, orixen) VALUES
-                                               (1, 'Os Muiñeiros', 'Tradicional', 'Galicia'),
-                                               (2, 'Cantareiras do Norte', 'Vocal', 'A Coruña'),
-                                               (3, 'Foliada Band', 'Moderno', 'Vigo'),
-                                               (4, 'Os do Tambor', 'Percusión', 'Lugo');
+-- Grupos (IDs automáticos)
+INSERT INTO grupo (nome, tipo, orixen) VALUES
+                                           ('Os Muiñeiros', 'Tradicional', 'Galicia'),
+                                           ('Cantareiras do Norte', 'Vocal', 'A Coruña'),
+                                           ('Foliada Band', 'Moderno', 'Vigo'),
+                                           ('Os do Tambor', 'Percusión', 'Lugo');
 
--- Foliadas
-INSERT INTO foliada (id, nome, fecha, hora, lugar, descripcion, latitude, lonxitude, imaxen, provincia_id) VALUES
-                                                                                                               (1, 'Foliada de Santiago', '2026-07-15', '20:00', 'Praza do Obradoiro',
-                                                                                                                'Gran foliada tradicional con grupos locales', 42.8806, -8.5457, 'santiago.jpg', 1),
-                                                                                                               (2, 'Foliada de Lugo', '2026-08-10', '21:30', 'Muralla de Lugo',
-                                                                                                                'Evento con música y baile tradicional', 43.0121, -7.5558, 'lugo.jpg', 2),
-                                                                                                               (3, 'Foliada de Ourense', '2026-06-20', '19:00', 'Praza Maior',
-                                                                                                                'Foliada con degustación gastronómica', 42.3367, -7.8641, 'ourense.jpg', 3),
-                                                                                                               (4, 'Foliada de Vigo', '2026-09-05', '22:00', 'Casco Vello',
-                                                                                                                'Gran evento nocturno con grupos modernos', 42.2406, -8.7207, 'vigo.jpg', 4);
+-- Foliadas (IDs automáticos)
+INSERT INTO foliada (nome, fecha, hora, lugar, descripcion, latitude, lonxitude, imaxen, provincia_id) VALUES
+                                                                                                           ('Foliada de Santiago', '2026-07-15', '20:00', 'Praza do Obradoiro',
+                                                                                                            'Gran foliada tradicional con grupos locais', 42.8806, -8.5457, 'santiago.jpg', 1),
+                                                                                                           ('Foliada de Lugo', '2026-08-10', '21:30', 'Muralla de Lugo',
+                                                                                                            'Evento con música e baile tradicional', 43.0121, -7.5558, 'lugo.jpg', 2),
+                                                                                                           ('Foliada de Ourense', '2026-06-20', '19:00', 'Praza Maior',
+                                                                                                            'Foliada con degustación gastronómica', 42.3367, -7.8641, 'ourense.jpg', 3),
+                                                                                                           ('Foliada de Vigo', '2026-09-05', '22:00', 'Casco Vello',
+                                                                                                            'Gran evento nocturno con grupos modernos', 42.2406, -8.7207, 'vigo.jpg', 4);
 
--- Favoritas
+-- ========================================
+-- REINICIAR SECUENCIAS PARA QUE EMPIECEN EN 1
+-- ========================================
+
+-- Solo necesario si la tabla ya existía y quieres reiniciar IDs
+ALTER SEQUENCE usuario_id_seq RESTART WITH 1;
+ALTER SEQUENCE grupo_id_seq RESTART WITH 1;
+ALTER SEQUENCE foliada_id_seq RESTART WITH 1;
+ALTER SEQUENCE favorita_id_seq RESTART WITH 1;
+
+-- ========================================
+-- INSERTAR VALORES EN FAVORITA Y FOLIADA_GRUPO
+-- ========================================
+
+
+-- Favoritas (IDs automáticos)
 INSERT INTO favorita (usuario_id, foliada_id) VALUES
                                                   (1, 1),
                                                   (1, 2),
@@ -112,3 +123,16 @@ INSERT INTO foliada_grupo (foliada_id, grupo_id) VALUES
                                                      (3, 4),
                                                      (4, 3),
                                                      (4, 1);
+
+-- ========================================
+-- REINICIAR SECUENCIAS PARA QUE EMPIECEN EN 1
+-- ========================================
+
+-- Solo necesario si la tabla ya existía y quieres reiniciar IDs
+ALTER SEQUENCE usuario_id_seq RESTART WITH 1;
+ALTER SEQUENCE grupo_id_seq RESTART WITH 1;
+ALTER SEQUENCE foliada_id_seq RESTART WITH 1;
+ALTER SEQUENCE favorita_id_seq RESTART WITH 1;
+
+--borrar columna que sobra:
+ALTER TABLE foliada DROP COLUMN imaxen;
