@@ -40,7 +40,7 @@
 <div class="container">
     <h2>Nueva Foliada</h2>
 
-    <form th:action="@{/foliadas/guardar}" th:object="${foliada}" method="post">
+    <form th:action="@{/foliadas/guardar}" th:object="${foliada}" method="post" enctype="multipart/form-data">
 
         <label>Nombre</label>
         <input type="text" th:field="*{nombre}" />
@@ -64,10 +64,10 @@
         <input type="number" step="any" th:field="*{lonxitude}" />
 
         <label>Imagen</label>
-        <input type="text" th:field="*{imaxe}" />
+        <input type="file" name="imagen" />
 
         <label>ID Provincia</label>
-        <input type="number" th:field="*{provinciaId}" />
+        <input type="number" th:field="*{provincia.id}" />
 
         <button type="submit">Guardar</button>
     </form>
