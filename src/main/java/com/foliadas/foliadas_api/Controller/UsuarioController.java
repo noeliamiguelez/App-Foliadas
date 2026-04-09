@@ -1,12 +1,14 @@
 package com.foliadas.foliadas_api.Controller;
 
 import com.foliadas.foliadas_api.DTO.FoliadaDTO;
+import com.foliadas.foliadas_api.DTO.LoginDTO;
 import com.foliadas.foliadas_api.DTO.UsuarioDTO;
 import com.foliadas.foliadas_api.Model.Foliada;
 import com.foliadas.foliadas_api.Model.Usuario;
 import com.foliadas.foliadas_api.Repository.UsuarioRepository;
 import com.foliadas.foliadas_api.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +67,15 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public Usuario update (@PathVariable int id, @RequestBody Usuario usuario){
         return usuarioService.update(id, usuario);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
+        Usuario usuario= usuarioService.login(loginDTO.getEmail(), loginDTO.getPassword());
+        if (usuario==null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o contraseña incorrectos");
+        }
+        return ResponseEntity.ok(usuario);
     }
 
     /*------------------------------------------

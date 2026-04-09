@@ -9,6 +9,7 @@ import com.foliadas.foliadas_api.Model.Usuario;
 import com.foliadas.foliadas_api.Repository.FoliadaRepository;
 import com.foliadas.foliadas_api.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -21,9 +22,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private final UsuarioRepository usuarioRepository;
-
     @Autowired
     private final FoliadaRepository foliadaRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UsuarioServiceImpl(UsuarioRepository usuarioRepository, FoliadaRepository foliadaRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -52,7 +54,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario u = new Usuario();
         u.setNome(usuarioDTO.getNombre());
         u.setEmail(usuarioDTO.getEmail());
-        u.setContrasinal("1234"); // contraseña por defecto
+
+        String passwordEncriptada= passwordEncoder.encode(usuarioDTO.getPassword());
+        u.setContrasinal(passwordEncriptada);
         Usuario saved = usuarioRepository.save(u);
         return toDTO(saved);
     }
@@ -71,6 +75,21 @@ public class UsuarioServiceImpl implements UsuarioService {
         existente.setEmail(usuario.getEmail());
 
         return usuarioRepository.save(existente);
+    }
+
+    @Override
+    public Usuario login(String email, String password) {
+        Usuario usuario= usuarioRepository.findByEmail(email).orElse(null);
+
+        if (usuario==null){
+            return null;
+        }
+        boolean coincide= passwordEncoder.matches(password, usuario.getContrasinal());
+        if (coincide){
+            return usuario;
+        }else{
+            return null;
+        }
     }
 
     // ----------------------------

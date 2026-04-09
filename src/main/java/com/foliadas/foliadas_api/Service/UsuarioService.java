@@ -15,6 +15,8 @@ public interface UsuarioService {
     UsuarioDTO create(UsuarioDTO usuarioDTO);
     void delete(int id);
     Usuario update(int id, Usuario usuario);
+    Usuario login(String email, String password);
+
     Set<FoliadaDTO> getFavoritas(int usuarioId);
     void addFavorita(int usuarioId, int foliadaId);
     void removeFavorita(int usuarioId, int foliadaId);
