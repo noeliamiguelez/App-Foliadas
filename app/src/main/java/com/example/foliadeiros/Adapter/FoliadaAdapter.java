@@ -10,7 +10,8 @@ import com.example.foliadeiros.Model.Foliada;
 
 import java.util.List;
 
-public class FoliadaAdapter extends RecyclerView.Adapter<FoliadaAdapter.ViewHolder> {
+public class FoliadaAdapter  {
+    /*
     private List<Foliada> lista;
 
     @NonNull
@@ -27,5 +28,5 @@ public class FoliadaAdapter extends RecyclerView.Adapter<FoliadaAdapter.ViewHold
     @Override
     public int getItemCount() {
         return 0;
-    }
+    }*/
 }
