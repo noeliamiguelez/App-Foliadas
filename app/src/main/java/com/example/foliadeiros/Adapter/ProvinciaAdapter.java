@@ -34,6 +34,18 @@ public class ProvinciaAdapter extends ArrayAdapter<Provincia> {
         TextView txt= convertView.findViewById(R.id.txtProvincia);
         txt.setText(provincia.getNombre());
 
+        String nombre= provincia.getNombre();
+
+        if (nombre.equals("A Coruña")){
+            convertView.setBackgroundResource(R.drawable.p_coruna_bg);
+        }else if(nombre.equals("Lugo")){
+            convertView.setBackgroundResource(R.drawable.p_lugo_bg);
+        }else if(nombre.equals("Ourense")){
+            convertView.setBackgroundResource(R.drawable.p_ourense_bg);
+        }else{
+            convertView.setBackgroundResource(R.drawable.p_pontevedra_bg);
+        }
+
         return convertView;
     }
 }

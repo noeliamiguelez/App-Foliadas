@@ -43,7 +43,6 @@
         android:layout_marginHorizontal="15dp"
         android:layout_below="@+id/buscar"
         android:layout_marginTop="20dp"
-        android:background="@drawable/provincias_bg"
         android:divider="#FFF1D1"
         android:dividerHeight="10dp"/>
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/jeju_hallasan"
         android:textAlignment="center"
-        android:padding="50dp"
-        android:textSize="18sp"/>
+        android:padding="40dp"
+        android:textSize="35dp"/>
 
 </RelativeLayout>
