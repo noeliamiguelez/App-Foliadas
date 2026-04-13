@@ -6,6 +6,15 @@
 
 ---
 
+## Índice
+1. [Descripción](#Descripción-del-proyecto)
+2. [Funcionalidades principais](#Funcionalidades-principais)
+3. [Esatdo actual do proxecto](#Estado-actual-do-proxecto)
+4. [Aplicacions necesarias](#Aplicacións-necesarias)
+5. [Instalacion e execucion](Instalación-e-execución)
+
+---
+
 ## Descripción del proyecto
 
 App foliadas é unha aplicación cliente-servidor para a xestión de información sobre foliadas, grupos e usuarios.
