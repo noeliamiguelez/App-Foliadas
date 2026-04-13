@@ -11,7 +11,7 @@
 2. [Funcionalidades principais](#Funcionalidades-principais)
 3. [Esatdo actual do proxecto](#Estado-actual-do-proxecto)
 4. [Aplicacions necesarias](#Aplicacións-necesarias)
-5. [Instalacion e execucion](Instalación-e-execución)
+5. [Instalacion e execucion](#Instalación-e-execución)
 
 ---
 
