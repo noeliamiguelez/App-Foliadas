@@ -1,55 +1,67 @@
 <h1 align="center">APP FOLIADAS</h1>
 
 <p align="center">
-<img src="https://img.shields.io/badge/STATUS-EN%20DESARROLLO-green">
+<img src="https://img.shields.io/badge/STATUS-EN%20DESENVOLVEMENTO-green">
 </p>
 
 ---
 
 ## Descripción del proyecto
 
-App Foliadas es una aplicación cliente-servidor para la gestión de información sobre foliadas, grupos y usuarios.
+App foliadas é unha aplicación cliente-servidor para a xestión de información sobre foliadas, grupos e usuarios.
 
-El sistema está compuesto por:
+O sistema está composto por:
 - Backend (API REST con Spring Boot)
 - Frontend (Aplicación Android)
 
-Permite la gestión de datos y la comunicación entre ambas partes para mostrar información en la aplicación móvil.
+- Permite a xestión de datos e información entre ambas partes para mostrar información na aplicación móbil
 
 ---
 
-## Funcionalidades principales
+## Funcionalidades principais
 
 ### Backend
-- CRUD de foliadas y grupos
-- Gestión de usuarios
+- CRUD de foliadas e grupos
+- Xestión de usuarios
 - Sistema de favoritos por usuario
 - Búsqueda de foliadas por provincia
-- API REST para comunicación con el cliente
+- API REST para comunicación co cliente
 
 ### Frontend
 - Visualización de foliadas
-- Consulta de datos desde la API
-- Interfaz para el usuario
-- Gestión de favoritos (en desarrollo)
+- Consulta de datos dende a API
+- Interfaz para o usuario
+- Xestión de favoritos (en desenvolvemento)
 
 ---
 
-## Estado actual del proyecto
+## Estado actual do proxecto
 
-El proyecto se encuentra en fase inicial de desarrollo:
+O proxecto atopase en fase inicial de desenvolvemento:
 
-- Estructura base del backend creada
-- Entidades principales implementadas
-- Frontend Android en desarrollo
-- Autenticación aún no implementada
-- Funcionalidades incompletas o en progreso
+- Estructura base do backend creada
+- Entidades principais implementadas
+- Frontend Android en desenvolvemento
+- Autenticación ainda non implementada
+- Funcionalidades incompletas ou en progreso
 
 ---
 
-## Instalación y ejecución
+## Aplicacións necesarias
+
+- Java 17+
+- IntelliJ
+- Android Studio
+- PostgreeSQL
+- Git
+
+---
+
+## Instalación e execución
 
 ### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/noeliamiguelez/App-Foliadas.git
+
+### 
