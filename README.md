@@ -59,18 +59,36 @@ O proxecto atopase en fase inicial de desenvolvemento:
 ## Aplicacións necesarias
 
 - Java 17+
-- IntelliJ
-- Android Studio
+- IntelliJ IDEA (para backend)
+- Android Studio (para frontend)
 - PostgreeSQL
+- pgAdmin (para a xestion da bd)
 - Git
 
 ---
 
 ## Instalación e execución
 
-### 1. Clonar el repositorio
+### Clonacion do proxecto: 
 
-```bash
-git clone https://github.com/noeliamiguelez/App-Foliadas.git
 
-### 
+
+### Configuracion da base de datos:
+
+O backend utiliza POstgreSQL como sistema de base de datos.
+Dentro do proxecto (backend) existe unha carpeta:
+- C:\Users\PC_NOELIA\Downloads\foliadas-api1\db
+Esta carpeta contén o arquivo 'init.sql' coa estructura da base de datos.
+
+#### Pasos para configurar a base de datos:
+
+1. Crear unha base de datos en PostgreSQL chamada foliadeiros
+2. Executar o script 'init.sql'.
+3. Configurar o arquivo: src/main/resources/application.properties
+   modifica os seguintes campos cos teus credenciales:
+   - spring.datasource.url=jdbc:postgresql://localhost:5432/foliadeiros
+   - spring.datasource.username=TU_USUARIO
+   - spring.datasource.password=TU_PASSWORD
+
+
+
