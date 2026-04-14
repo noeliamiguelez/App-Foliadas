@@ -12,6 +12,7 @@
 3. [Estado actual do proxecto](#Estado-actual-do-proxecto)
 4. [Aplicacions necesarias](#Aplicacións-necesarias)
 5. [Instalacion](#Instalación)
+6. [Historial de commit](#Historial-de-commit)
 
 ---
 
@@ -118,6 +119,8 @@ O servidor vaise iniciar en: http://localhost:8081
 #### ⚠️ Importante
 
 É necesario executar primeiro o backend antes de iniciar frontend.
+
+---
 
 ## Historial de commit
 
