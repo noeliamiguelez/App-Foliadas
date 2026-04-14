@@ -12,13 +12,16 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface FoliadaApi {
+public interface FoliadaApiService {
 
     @GET("foliadas")
     Call<List<Foliada>> getAll();
 
     @GET("foliadas/{id}")
     Call<Foliada> getById(@Path("id") int id);
+
+    @GET("foliadas/provincia/{id}")
+    Call<List<Foliada>> getByProvincia(@Path("id") int provinciaId);
 
     @POST("foliadas")
     Call<Foliada> create(@Body Foliada foliada);

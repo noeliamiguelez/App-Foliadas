@@ -14,7 +14,4 @@ public interface ProvinciasApiService {
     @GET("provincias")
     Call<List<Provincia>> getProvincias();
 
-    @GET("provincias/{id}/foliadas")
-    Call<List<Foliada>> getFoliadas(@Path("id") int provinciaId);
-
 }
