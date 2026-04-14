@@ -97,7 +97,6 @@ Esta carpeta contén o arquivo 'init.sql' coa estructura da base de datos.
 
 Unha vez clonado o respositorio e configurada a base de datos, é necesario executar backend e frontend por separado
 
---- 
 ### Backend(Spring Boot - IntelliJ IDEA)
 
 1. Abrir IntelliJ
