@@ -125,6 +125,7 @@ public class FoliadaServiceImpl implements FoliadaService{
 
     private FoliadaDTO toDTO(Foliada f){
         FoliadaDTO dto= new FoliadaDTO();
+        dto.setId(f.getId());
         dto.setNombre(f.getNome());
         dto.setFecha(f.getFecha());
         dto.setHora(f.getHora());
