@@ -11,7 +11,7 @@
 2. [Funcionalidades principais](#Funcionalidades-principais)
 3. [Esatdo actual do proxecto](#Estado-actual-do-proxecto)
 4. [Aplicacions necesarias](#Aplicacións-necesarias)
-5. [Instalacion e execucion](#Instalación-e-execución)
+5. [Instalacion](#Instalación)
 
 ---
 
@@ -61,34 +61,61 @@ O proxecto atopase en fase inicial de desenvolvemento:
 - Java 17+
 - IntelliJ IDEA (para backend)
 - Android Studio (para frontend)
-- PostgreeSQL
+- PostgreSQL
 - pgAdmin (para a xestion da bd)
 - Git
 
 ---
 
-## Instalación e execución
+## Instalación 
 
 ### Clonacion do proxecto: 
 
+Para poder probar o proxecto necesitamos clonar o repositorio no que se atopa tanto backend como frontend.
+Na terminal introducimos o seguinte comando:
+git clone https://github.com/noeliamiguelez/App-Foliadas.git
 
+---
 
-### Configuracion da base de datos:
+## Configuracion da base de datos:
 
 O backend utiliza POstgreSQL como sistema de base de datos.
 Dentro do proxecto (backend) existe unha carpeta:
-- C:\Users\PC_NOELIA\Downloads\foliadas-api1\db
+- db/init.sql
 Esta carpeta contén o arquivo 'init.sql' coa estructura da base de datos.
 
-#### Pasos para configurar a base de datos:
+### Pasos para configurar a base de datos:
 
 1. Crear unha base de datos en PostgreSQL chamada foliadeiros
 2. Executar o script 'init.sql'.
-3. Configurar o arquivo: src/main/resources/application.properties
-   modifica os seguintes campos cos teus credenciales:
+3. Configurar o arquivo: src/main/resources/application.properties. Modifica os seguintes campos cos teus credenciales:
    - spring.datasource.url=jdbc:postgresql://localhost:5432/foliadeiros
    - spring.datasource.username=TU_USUARIO
    - spring.datasource.password=TU_PASSWORD
 
+## Execución do proxecto
 
+Unha vez clonado o respositorio e configurada a base de datos, é necesario executar backend e frontend por separado
 
+--- 
+### Backend(Spring Boot - IntelliJ IDEA)
+
+1. Abrir IntelliJ
+2. En el menú seleccionar File>Open...
+3. Escoller a carpeta 'foliadas-api' dentro de backend
+4. Esperar que carguen as dependencias
+5. Executar a aplicación
+
+O servidor vaise iniciar en: http://localhost:8081
+
+### Frontend(Android- Android Studio)
+
+1. Abrir Android Studio
+2. No menú seleccionar: File>Open...
+3. Escoller a carpeta 'foliadeiros' dentro de frontend
+4. Esperar á sincronización de Gradle
+5. Executar a aplicacion no emulador
+
+#### ⚠️ Importante
+
+É necesario executar primeiro o backend antes de iniciar frontend.
