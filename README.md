@@ -118,3 +118,10 @@ O servidor vaise iniciar en: http://localhost:8081
 #### ⚠️ Importante
 
 É necesario executar primeiro o backend antes de iniciar frontend.
+
+## Historial de commit
+
+El historial completo del backend y frontend se conserva mediante git subtree, pudiendo verificarse localmente con git log en cada subcarpeta.
+En caso de non servir, deixo os dous enlaces a cada un dos repositorios por individual:
+- Backend: https://github.com/noeliamiguelez/foliadas-api.git
+- Frontend: https://github.com/noeliamiguelez/Foliadeiros.git
