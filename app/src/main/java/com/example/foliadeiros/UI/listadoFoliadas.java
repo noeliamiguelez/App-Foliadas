@@ -1,10 +1,12 @@
 package com.example.foliadeiros.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -67,6 +69,8 @@ public class listadoFoliadas extends AppCompatActivity {
             return insets;
         });
 
+        TextView titulo= (TextView) findViewById(R.id.titulo);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,6 +78,7 @@ public class listadoFoliadas extends AppCompatActivity {
 
         provinciaId= getIntent().getIntExtra("provincia_id", -1);
         nombreProvincia= getIntent().getStringExtra("provincia_nombre");
+        titulo.setText(nombreProvincia);
 
         api= RetrofitClient.getClient().create(FoliadaApiService.class);
         cargarFoliadas();
@@ -81,6 +86,13 @@ public class listadoFoliadas extends AppCompatActivity {
         ImageButton bt_atras= (ImageButton) findViewById(R.id.bt_atras);
         bt_atras.setOnClickListener(view -> {
             finish();
+        });
+
+        listView.setOnItemClickListener((parent, view, position, id)->{
+            Foliada f= foliadas.get(position);
+            Intent intent= new Intent(listadoFoliadas.this, InfoFoliada.class);
+            intent.putExtra("foliada_id", f.getId());
+            startActivity(intent);
         });
     }
 
@@ -95,9 +107,7 @@ public class listadoFoliadas extends AppCompatActivity {
                     listView= findViewById(R.id.lista_foliadas);
                     listView.setAdapter(adapter);
                 }
-
             }
-
             @Override
             public void onFailure(Call<List<Foliada>> call, Throwable t) {
                 Toast.makeText(listadoFoliadas.this, "Error cargando foliadas", Toast.LENGTH_SHORT).show();

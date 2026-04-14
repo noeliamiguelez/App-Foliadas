@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Foliadeiros"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UI.InfoFoliada"
+            android:exported="false" />
+        <activity
             android:name=".UI.listadoFoliadas"
             android:exported="false" />
         <activity
