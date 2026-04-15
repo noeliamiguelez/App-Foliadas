@@ -18,7 +18,7 @@
 
 ## Descripción do proxecto
 
-App foliadas é unha aplicación cliente-servidor para a xestión de información sobre foliadas, grupos e usuarios.
+Foliadeiros é unha aplicación cliente-servidor para a xestión de información sobre foliadas, grupos e usuarios.
 
 O sistema está composto por:
 - Backend (API REST con Spring Boot)
@@ -124,7 +124,8 @@ O servidor vaise iniciar en: http://localhost:8081
 
 ## Historial de commit
 
-El historial completo del backend y frontend se conserva mediante git subtree, pudiendo verificarse localmente con git log en cada subcarpeta.
+O historial completo do backend conservase mediante git subtree.
+En caso de non verse en GitHub, podese verificar localmente con 'git log' en cada carpetea.
 En caso de non servir, deixo os dous enlaces a cada un dos repositorios por individual:
 - Backend: https://github.com/noeliamiguelez/foliadas-api.git
 - Frontend: https://github.com/noeliamiguelez/Foliadeiros.git
