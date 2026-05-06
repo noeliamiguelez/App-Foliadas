@@ -52,7 +52,8 @@ public class listadoFoliadas extends AppCompatActivity {
         int id= item.getItemId();
 
         if (id==R.menu.menu){
-            Toast.makeText(this, "Foliadas favoritas", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(listadoFoliadas.this, Favoritas.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

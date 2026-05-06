@@ -48,10 +48,10 @@ public class Provincias extends AppCompatActivity {
         int id= item.getItemId();
 
         if (id==R.menu.menu){
-            Toast.makeText(this, "Foliadas favoritas", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Provincias.this, Favoritas.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -95,15 +95,12 @@ public class Provincias extends AppCompatActivity {
                 if (response.isSuccessful()&&response.body()!=null){
                     provincias= response.body();
 
-                    Log.d("API", "size: " + provincias.size());
-
                     adapter= new ProvinciaAdapter(Provincias.this, provincias);
                     listView.setAdapter(adapter);
                 }
             }
             @Override
             public void onFailure(Call<List<Provincia>> call, Throwable t) {
-                Log.e("API ERROR", "Mensaje: " + t.getMessage(), t);
                 Toast.makeText(Provincias.this, "Error al cargar provincias", Toast.LENGTH_SHORT).show();
 
             }

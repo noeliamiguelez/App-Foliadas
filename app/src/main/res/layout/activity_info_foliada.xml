@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/cartel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
         android:adjustViewBounds="true"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="20dp"
@@ -44,16 +44,16 @@
         />
     <ImageButton
         android:id="@+id/bt_favorita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/cartel"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"/>
 
     <ImageButton
         android:id="@+id/bt_no_favorita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_below="@+id/bt_favorita"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"/>
@@ -90,8 +90,8 @@
         android:id="@+id/hora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_no_favorita"
-        android:layout_toRightOf="@+id/txt_data"
+        android:layout_below="@+id/fecha"
+        android:layout_toRightOf="@+id/txt_hora"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:fontFamily="@font/jeju_hallasan"/>
@@ -119,7 +119,7 @@
         android:id="@+id/txt_descripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_grupos"
+        android:layout_below="@+id/grupos"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:fontFamily="@font/jeju_hallasan"
@@ -133,6 +133,36 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:fontFamily="@font/jeju_hallasan"/>
+
+    <TextView
+        android:id="@+id/txt_ubicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descripcion"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/jeju_hallasan"
+        android:text="Ubicación: "/>
+    <TextView
+        android:id="@+id/ubicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descripcion"
+        android:layout_toRightOf="@+id/txt_ubicacion"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/jeju_hallasan"/>
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/ubicacion"
+        android:src="@drawable/map_location_dot_solid"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent"
+        />
+
 
 
 

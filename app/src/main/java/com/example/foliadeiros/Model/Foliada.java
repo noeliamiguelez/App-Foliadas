@@ -1,5 +1,7 @@
 package com.example.foliadeiros.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -15,6 +17,8 @@ public class Foliada {
     private String descripcion;
     private Double latitude;
     private Double lonxitude;
+
+    @SerializedName("imaxe")
     private String imaxe;
 
     private Provincia provincia;

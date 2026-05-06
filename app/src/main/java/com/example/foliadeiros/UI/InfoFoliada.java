@@ -2,6 +2,7 @@ package com.example.foliadeiros.UI;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.example.foliadeiros.Adapter.FoliadaAdapter;
 import com.example.foliadeiros.Api.FoliadaApiService;
 import com.example.foliadeiros.Api.RetrofitClient;
 import com.example.foliadeiros.Model.Foliada;
+import com.example.foliadeiros.Model.Grupo;
 import com.example.foliadeiros.R;
 
 import java.util.ArrayList;
@@ -43,6 +45,11 @@ public class InfoFoliada extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ImageButton bt_atras= (ImageButton) findViewById(R.id.bt_atras);
+        bt_atras.setOnClickListener(view -> {
+            finish();
+        });
+
         api = RetrofitClient.getClient().create(FoliadaApiService.class);
 
         foliadaId= getIntent().getIntExtra("foliada_id", -1);
@@ -52,31 +59,50 @@ public class InfoFoliada extends AppCompatActivity {
         TextView txt_hora= (TextView) findViewById(R.id.hora);
         TextView txt_grupo= (TextView) findViewById(R.id.grupos);
         TextView txt_descripcion= (TextView) findViewById(R.id.descripcion);
+        TextView txt_ubi= (TextView) findViewById(R.id.ubicacion);
 
         api.getById(foliadaId).enqueue(new Callback<Foliada>() {
             @Override
             public void onResponse(Call<Foliada> call, Response<Foliada> response) {
                 if (response.isSuccessful()&&response.body()!=null){
                     Foliada foliada= response.body();
+                    Log.d("ImaxeDEBUG", String.valueOf(foliada.getImaxe()));
                     titulo.setText(foliada.getNombre());
                     if(foliada.getImaxe()!=null && !foliada.getImaxe().isEmpty()){
-                        Glide.with(InfoFoliada.this).load(foliada.getImaxe()).into(img_cartel);
+                        String nombre = foliada.getImaxe().replace("images", "");
+                        String url = "http://10.0.2.2:8081/images/"+nombre;
+                        Glide.with(InfoFoliada.this).load(url).into(img_cartel);
                     }else{
                         img_cartel.setImageResource(R.drawable.image_not_found);
                     }
-                    if (foliada.getFecha()!=null && foliada.getFecha().isEmpty()){
+                    if (foliada.getFecha()!=null && !foliada.getFecha().isEmpty()){
                         txt_fecha.setText(foliada.getFecha());
                     }else{
                         txt_fecha.setText(" ");
-                    }if (foliada.getHora()!=null&& foliada.getHora().isEmpty()){
+                    }
+                    if (foliada.getGrupos()!=null && !foliada.getGrupos().isEmpty()){
+                        StringBuilder nombres= new StringBuilder();
+                        for (Grupo g: foliada.getGrupos()){
+                            nombres.append(g.getNombre()).append("\n");
+                        }
+                        txt_grupo.setText(nombres.toString());
+                    }else{
+                        txt_grupo.setText(" ");
+                    }
+                    if (foliada.getHora()!=null&& !foliada.getHora().isEmpty()){
                         txt_hora.setText(foliada.getHora());
                     }else{
                         txt_hora.setText(" ");
                     }
-                    if (foliada.getDescripcion()!=null&&foliada.getDescripcion().isEmpty()){
+                    if (foliada.getDescripcion()!=null&&!foliada.getDescripcion().isEmpty()){
                         txt_descripcion.setText(foliada.getDescripcion());
                     }else{
                         txt_descripcion.setText(" ");
+                    }
+                    if(foliada.getLugar()!= null && !foliada.getLugar().isEmpty()){
+                        txt_ubi.setText(foliada.getLugar());
+                    }else{
+                        txt_ubi.setText(" ");
                     }
                 }
             }
