@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -73,6 +74,11 @@ public class Provincias extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        EditText buscador= (EditText) findViewById(R.id.buscar);
+        buscador.setOnClickListener(view -> {
+
+        });
 
         listView.setOnItemClickListener((parent, view, position, id)->{
             Provincia p= provincias.get(position);
