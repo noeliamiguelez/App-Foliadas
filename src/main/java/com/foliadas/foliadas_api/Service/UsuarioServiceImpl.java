@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,14 +52,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDTO create(UsuarioDTO usuarioDTO) {
-        Usuario u = new Usuario();
-        u.setNome(usuarioDTO.getNombre());
-        u.setEmail(usuarioDTO.getEmail());
+        Optional<Usuario> usuarioOpt= usuarioRepository.findByEmail(usuarioDTO.getEmail());
+        if (usuarioOpt.isPresent()){
+            throw new RuntimeException("YA EXISTE EL MAIL");
+        }else {
+            Usuario u = new Usuario();
+            u.setNome(usuarioDTO.getNombre());
+            u.setEmail(usuarioDTO.getEmail());
 
-        String passwordEncriptada= passwordEncoder.encode(usuarioDTO.getPassword());
-        u.setContrasinal(passwordEncriptada);
-        Usuario saved = usuarioRepository.save(u);
-        return toDTO(saved);
+            String passwordEncriptada = passwordEncoder.encode(usuarioDTO.getPassword());
+            u.setContrasinal(passwordEncriptada);
+            Usuario saved = usuarioRepository.save(u);
+            return toDTO(saved);
+        }
     }
 
     @Override
